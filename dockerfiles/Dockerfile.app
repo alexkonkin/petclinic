@@ -11,7 +11,7 @@ FROM alpine:latest as application
 WORKDIR /opt/petclinic
 COPY --from=builder /opt/petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar .
 RUN apk --update add openjdk8-jre
-CMD ["/usr/bin/java", "-jar","./spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"]
+CMD ["/usr/bin/java", "-jar","-Dspring.profiles.active=mysql","./spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"]
 
 
 
