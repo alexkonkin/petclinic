@@ -3,6 +3,11 @@ version: '2.1'
 services:
    ngnx:
      image: nginx:latest
+     build:
+       context: ./dockerfiles
+       dockerfile: Dockerfile.nginx
+       args:
+         NGINX_CONF: ${NGINX_CONF}
      ports:
        - 10.0.2.15:80:80
      depends_on:
@@ -10,6 +15,9 @@ services:
 
    app:
      image: petclinic:latest
+     build:
+       context: ./dockerfiles
+       dockerfile: Dockerfile.app
      depends_on:
        db:
          condition: service_healthy
