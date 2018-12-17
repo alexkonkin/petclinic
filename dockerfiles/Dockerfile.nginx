@@ -7,7 +7,6 @@ RUN yum install --nogpgcheck -y epel-release &&\
     echo "$NGINX_CONF" > /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
-#CMD [ "/bin/bash", "-c", "echo $ENV_APP_IP"]
 
 
 

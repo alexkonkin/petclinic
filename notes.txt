@@ -27,6 +27,10 @@ docker rmi $(docker image ls|awk '{print $1" "$3}'|grep '<none>'|awk '{print $2}
 
 ----
 export NGINX_CONF=$(cat conf/nginx/nginx.conf)
+export IP=10.0.2.15
 docker-compose up
-
+----
+docker stop $(docker ps -a -q) &
+docker update --restart=no $(docker ps -a -q) &
+systemctl restart docker
 

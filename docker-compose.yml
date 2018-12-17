@@ -3,18 +3,20 @@ version: '2.1'
 services:
    ngnx:
      image: nginx:latest
+     restart: always
      build:
        context: ./dockerfiles
        dockerfile: Dockerfile.nginx
        args:
          NGINX_CONF: ${NGINX_CONF}
      ports:
-       - 10.0.2.15:80:80
+       - ${IP_EXT}:80:80
      depends_on:
        - app
 
    app:
      image: petclinic:latest
+     restart: always
      build:
        context: ./dockerfiles
        dockerfile: Dockerfile.app
@@ -22,15 +24,16 @@ services:
        db:
          condition: service_healthy
      volumes:
-     - ./m2:/root/.m2
+     - m2:/root/.m2
 
    db:
      image: mysql:5.7.8
+     restart: always
      ports:
-       - 10.0.2.15:3306:3306 # change ip if required
+       - ${IP_INT}:3306:3306 # change ip if required
      volumes:
      - ./conf/mysql:/docker-entrypoint-initdb.d
-     - ./db_data:/var/lib/mysql
+     - /opt/petclinic/db_data:/var/lib/mysql
      environment:
         MYSQL_DATABASE: petclinic
         MYSQL_ROOT_PASSWORD: petclinic
@@ -40,8 +43,9 @@ services:
        timeout: 5s
        retries: 5
 
-#volumes:
-#   db_data:
+volumes:
+   db_data:
+   m2:
 
 
 
