@@ -11,7 +11,7 @@ To run the application:
   IP_INT=your internal IP
   
 - define environment variable NGINX_CONF then build and run
-  containers bu executing the command:
+  containers by executing the command:
   
   ```
   export NGINX_CONF=$(cat conf/nginx/nginx.conf) && docker-compose up -d
