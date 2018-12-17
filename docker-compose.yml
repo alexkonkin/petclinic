@@ -31,7 +31,7 @@ services:
        - ${IP_INT}:3306:3306 # change ip if required
      volumes:
      - ./conf/mysql:/docker-entrypoint-initdb.d
-     - /opt/petclinic/db_data:/var/lib/mysql
+     - ./db_data:/var/lib/mysql
      environment:
         MYSQL_DATABASE: petclinic
         MYSQL_ROOT_PASSWORD: petclinic
