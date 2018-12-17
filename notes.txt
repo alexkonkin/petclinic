@@ -25,4 +25,8 @@ docker exec -it app sh
 remove unnamed images
 docker rmi $(docker image ls|awk '{print $1" "$3}'|grep '<none>'|awk '{print $2}')
 
+----
+export NGINX_CONF=$(cat conf/nginx/nginx.conf)
+docker-compose up
+
 
