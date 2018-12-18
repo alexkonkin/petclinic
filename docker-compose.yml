@@ -33,10 +33,10 @@ services:
      - ./conf/mysql:/docker-entrypoint-initdb.d
      - ./db_data:/var/lib/mysql
      environment:
-        MYSQL_DATABASE: petclinic
-        MYSQL_ROOT_PASSWORD: petclinic
+        MYSQL_DATABASE: ${DB_NAME}
+        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
      healthcheck:
-       test: "/usr/bin/mysql -u root -h db --password=\"petclinic\" -e \"show databases;\""
+       test: "/usr/bin/mysql -u root -h db --password=${DB_PASSWORD} -e \"show databases;\""
        interval: 5s
        timeout: 5s
        retries: 5
