@@ -36,7 +36,7 @@ services:
         MYSQL_DATABASE: ${DB_NAME}
         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
      healthcheck:
-       test: "/usr/bin/mysql -u root -h db --password=${DB_PASSWORD} -e \"show databases;\""
+       test: "/usr/bin/mysql -u root -h db --password=${DB_PASSWORD} -e \"use petclinic; select count(*) from owners;\""
        interval: 5s
        timeout: 5s
        retries: 5
