@@ -34,3 +34,10 @@ docker stop $(docker ps -a -q) &
 docker update --restart=no $(docker ps -a -q) &
 systemctl restart docker
 
+-----------
+Hint on how to run both containers and pass an IP address of the db
+container to app container
+
+docker run --name mysql -v /home/vagrant/tests/mysql/db_data:/var/lib/mysql -v /home/vagrant/tests/mysql/init_data/:/docker-entrypoint-initdb.d/ -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 alexkonkin/mysql:5.7.8
+
+docker run --name app --add-host=db:172.17.0.1 -p 8080:8080 alexkonkin/petclinic:latest
